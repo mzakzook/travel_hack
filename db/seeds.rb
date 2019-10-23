@@ -13,6 +13,7 @@
     email: Faker::Internet.email,
     location: Faker::Address.city,
     bio: Faker::Hipster.paragraphs(number: 2),
+    username: Faker::Internet.password,
     password: Faker::Internet.password
   })
 end

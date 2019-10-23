@@ -8,36 +8,38 @@ class HacksController < ApplicationController
 
   def new
     @hack = Hack.new
-    @hack.user
-
+    @destination = Destination.find(params[:destination_id])
+    @user = User.find(session[:user_id])
   end
 
   def create
-    @hack = Hack.create(hack_params)
+    @hack = Hack.create(hack_params)    
     if @hack.valid?
-      redirect_to @hack
+      redirect_to destination_hack_path(id: @hack)
     else
-      flash.now[:errors] = @hack.errors.full_messages
-      render 'new' 
+      flash[:errors] = @hack.errors.full_messages
+      redirect_to new_destination_hack_path(params[:destination_id]) 
     end
   end
 
   def edit
+    @destination = Destination.find(params[:destination_id])
+    @user = User.find(session[:user_id])
   end
 
   def update
     @hack.update(hack_params)
     if @hack.valid?
-      redirect_to @hack
+      redirect_to destination_hack_path(id: @hack)
     else
-      flash.now[:errors] = @hack.errors.full_messages
-      render 'edit'
+      flash[:errors] = @hack.errors.full_messages
+      redirect_to edit_destination_hack_path
     end 
   end
 
   def destroy
     @hack.destroy
-    redirect_to hacks_path
+    redirect_to destination_path(params[:destination_id])
   end
 
   private

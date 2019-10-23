@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-  # before_action :require_login, only: [:]
   before_action :require_login, except:[:new, :create]
 
   def show
-    byebug
+    
   end
 
   def new
@@ -47,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :birthdate, :email, :user_city, :password, :password_confirmation)
+    params.require(:user).permit(:name, :birthdate, :email, :username, :location, :password, :password_confirmation)
   end
 
 

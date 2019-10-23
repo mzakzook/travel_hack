@@ -1,5 +1,7 @@
 <h1><%= @destination.str_addr_fields %></h1>
 
+<h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
+
 <h3>Travel Hacks</h3>
 <% @destination.hacks.each do |hack| %>
   <p><%= hack.category %></p>
@@ -9,27 +11,6 @@
 <% end %>
 
 
-  <h3>Add a New Travel Hack</h3>
+  
 
-  <%= form_for @hack do |f| %>
-    <div>
-      <%= f.label :category %>
-      <%= f.select(:category, @categories) %>
-    </div>
-      <div>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-    <div>
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
-      <div>
-    <%= f.submit %>
-  <% end %>
-
-
-
-
-
-
+  
