@@ -1,9 +1,24 @@
-<h1>Account Details</h1>
-<br>
+<h1><%= @user.username %></h1>
 <%= @user.name %>
 <br>
-<%= @user.email %>
+<%= @user.location %>
 <br>
-<%= @user.user_city %>
+<%= @user.bio %>
 <br>
-<%= @user.age %>
+<%= "Age: #{@user.age}" %>
+<br>
+
+<% if logged_in? && current_user == @user %>
+  <%= link_to "Edit Profile", edit_user_path %>
+<% end %>
+
+<% @user.destinations.each do |destination| %>
+  <h3><%= destination.str_addr_fields %></h3>
+        <% destination.hacks.each do |hack|%>
+            <p><%= JSON.parse(hack.content).join(' ') %></p>
+        <% end %>
+<% end %>
+
+<%# **create button to link out to destinations/index %>
+<h3>Check Out Destinations and Add Your Hacks</h3>
+<%= link_to 'Destinations', destinations_path %>

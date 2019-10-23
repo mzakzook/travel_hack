@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :hacks
   has_many :destinations, through: :hacks
   # has_many :comments, through: :hacks
+  validates :birthdate, presence: true
   has_secure_password
 
   def age
