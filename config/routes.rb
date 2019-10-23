@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :destinations, only: [:index, :show] do
-    resources :hacks, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :destinations, only: [:index, :show] do 
+    resources :hacks, except: [:index]
   end
   resources :users, only: [:show, :create, :edit, :update, :destroy] 
   resources :sessions, only: [:new, :create, :destroy]
