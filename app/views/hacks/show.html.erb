@@ -1,7 +1,10 @@
 <h1><%= @hack.title %></h1>
 <h3>Hacker: <%= @hack.user.username %></h3>
 <h3>Destination: <%= @hack.destination.str_addr_fields %></h3>
+<h3>Category: <%= @hack.category %></h3>
 <br>
-<h4><%= button_to "Edit Hack", edit_destination_hack_path, :method => :get %></h4>
+<% if current_user == @hack.user %>
+    <h4><%= button_to "Edit Hack", edit_destination_hack_path, :method => :get %></h4>
+<% end %>
 <br>
 <%= @hack.content %>

@@ -15,7 +15,7 @@
 <% @user.destinations.each do |destination| %>
   <h3><%= destination.str_addr_fields %></h3>
         <% destination.hacks.each do |hack|%>
-            <p><%= JSON.parse(hack.content).join(' ') %></p>
+            <p><%= hack.content %></p>
         <% end %>
 <% end %>
 
