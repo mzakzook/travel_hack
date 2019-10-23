@@ -9,8 +9,6 @@ class Destination < ApplicationRecord
     str << ", #{self.country}" unless self.country == 'USA'
   end
 
- 
-
   def self.search(search)
     if search
       destinations = Destination.where("city LIKE (?) OR state LIKE (?) OR country LIKE (?)", "%#{search}%", "%#{search}%", "%#{search}%")
