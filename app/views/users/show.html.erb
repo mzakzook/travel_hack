@@ -31,3 +31,6 @@
 
 <%= button_to 'Destinations', destinations_path, method: :get %>
 <br>
+
+
+<%= render partial: 'unlogged_in', locals {user: @user}%>

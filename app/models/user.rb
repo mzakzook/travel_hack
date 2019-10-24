@@ -15,4 +15,6 @@ class User < ApplicationRecord
     bday = birthdate.strftime("%d-%m-%Y")
     ((Time.zone.now - bday.to_time) / 1.year.seconds).floor
   end
+
+
 end

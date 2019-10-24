@@ -8,6 +8,9 @@ class HacksController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
+  ##
+
+
   def new
     
     @hack = Hack.new
