@@ -3,8 +3,44 @@
 <h3>Destination: <%= @hack.destination.str_addr_fields %></h3>
 <h3>Category: <%= @hack.category %></h3>
 <br>
+<%= @hack.content %>
+<br>
 <% if current_user == @hack.user %>
-    <h4><%= button_to "Edit Hack", edit_destination_hack_path, :method => :get %></h4>
+    <h4><%= button_to "Edit Hack", edit_hack_path, :method => :get %></h4>
 <% end %>
 <br>
-<%= @hack.content %>
+<br>
+<h3>Comments</h3>
+<% @hack.comments.each do |comment| %>
+    <li>
+    <%= comment.user.username %>
+    <br>
+    <%= comment.content %>
+    <% if comment.user == current_user %>
+        <%= button_to "Delete Comment", comment, :method => :delete %>
+    <% end %>
+    </li>
+<% end %>
+<br>
+<h4>Add Comment</h4>
+
+<% if flash[:comment_errors] %>
+  <% flash[:comment_errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+
+<%= form_for [@hack, @comment] do |f| %>
+    <div>
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+    <div>
+      <%= f.hidden_field :user_id, :value => @user.id %>
+      <%= f.hidden_field :hack_id, :value => @hack.id %>
+    </div>
+      
+    <%= f.submit %>
+  <% end %>
+

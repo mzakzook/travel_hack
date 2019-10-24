@@ -4,18 +4,21 @@ class HacksController < ApplicationController
     before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
   def show
+    @comment = Comment.new
+    @user = User.find(session[:user_id])
   end
 
   def new
+    
     @hack = Hack.new
     @destination = Destination.find(params[:destination_id])
     @user = User.find(session[:user_id])
   end
 
   def create
-    @hack = Hack.create(hack_params)    
+    @hack = Hack.create(hack_params)   
     if @hack.valid?
-      redirect_to destination_hack_path(id: @hack)
+      redirect_to hack_path(id: @hack)
     else
       flash[:errors] = @hack.errors.full_messages
       redirect_to new_destination_hack_path(params[:destination_id]) 
@@ -23,23 +26,23 @@ class HacksController < ApplicationController
   end
 
   def edit
-    @destination = Destination.find(params[:destination_id])
     @user = User.find(session[:user_id])
+    
   end
 
   def update
     @hack.update(hack_params)
     if @hack.valid?
-      redirect_to destination_hack_path(id: @hack)
+      redirect_to hack_path(id: @hack)
     else
       flash[:errors] = @hack.errors.full_messages
-      redirect_to edit_destination_hack_path
+      redirect_to edit_hack_path
     end 
   end
 
   def destroy
     @hack.destroy
-    redirect_to destination_path(params[:destination_id])
+    redirect_to destinations_path
   end
 
   private

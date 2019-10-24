@@ -18,9 +18,11 @@
       <%= f.label :content %>
       <%= f.text_area :content %>
     </div>
-      <%= f.hidden_field :user_id, :value => @user.id %>
-      <%= f.hidden_field :destination_id, :value => @destination.id %>
     <div>
+      <%= f.hidden_field :user_id, :value => @user.id %>
+      <% if !@hack.id %>
+        <%= f.hidden_field :destination_id, :value => @destination.id %>
+      <% end %>
     </div>
       
     <%= f.submit %>
