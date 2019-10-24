@@ -1,0 +1,4 @@
+<%=# button_to 'Like', likes_path, action: 'post', params: {:user_id => current_user.id, :hack_id => @hack.id} %>
+
+
+@hack.likes.find(params[:format])

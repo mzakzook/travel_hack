@@ -1,7 +1,8 @@
 class Hack < ApplicationRecord
   belongs_to :user
   belongs_to :destination
-  validates :title, presence: true
+  has_many :likes, dependent: :destroy
   # has_many :comments
+  validates :title, presence: true
 
 end

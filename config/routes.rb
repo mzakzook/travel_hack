@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :comments
   resources :destinations, only: [:index, :show] do 
-    resources :hacks, except: [:index]
+    resources :hacks, shallow: true do
+      resources :comments, shallow: true
+      resources :likes
+    end
   end
   resources :users, only: [:show, :create, :edit, :update, :destroy] 
   resources :sessions, only: [:new, :create, :destroy]
@@ -11,6 +13,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # get 'welcome', to: 
+  root 'welcome#welcome'
 
 end

@@ -16,7 +16,6 @@
     <%= f.text_area :bio %>
   </div>
   <div>
-  <% if @user.new_record? %>
     <div>
       <%= f.label :username %>
       <%= f.text_field :username %>
@@ -33,6 +32,5 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </div>
-  <% end %>
   <%= f.submit %>
 <% end %>

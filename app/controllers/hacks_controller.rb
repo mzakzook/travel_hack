@@ -15,7 +15,7 @@ class HacksController < ApplicationController
   def create
     @hack = Hack.create(hack_params)    
     if @hack.valid?
-      redirect_to destination_hack_path(id: @hack)
+      redirect_to hack_path(id: @hack)
     else
       flash[:errors] = @hack.errors.full_messages
       redirect_to new_destination_hack_path(params[:destination_id]) 

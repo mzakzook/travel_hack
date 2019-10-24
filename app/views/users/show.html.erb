@@ -9,16 +9,17 @@
 <br>
 
 <% if logged_in? && current_user == @user %>
-  <%= link_to "Edit Profile", edit_user_path %>
+  <%= button_to "Edit Profile", edit_user_path, method: :get %>
 <% end %>
 
-<% @user.destinations.each do |destination| %>
-  <h3><%= destination.str_addr_fields %></h3>
-        <% destination.hacks.each do |hack|%>
-            <p><%= JSON.parse(hack.content).join(' ') %></p>
-        <% end %>
+<% @user.hacks.each do |hack| %>
+  <h3><%= hack.destination.str_addr_fields %></h3>
+    <p><%= hack.content %><p>
 <% end %>
 
 <%# **create button to link out to destinations/index %>
 <h3>Check Out Destinations and Add Your Hacks</h3>
-<%= link_to 'Destinations', destinations_path %>
+
+<%= button_to 'Destinations', destinations_path, method: :get %>
+<br>
+
