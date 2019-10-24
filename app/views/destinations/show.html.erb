@@ -1,6 +1,8 @@
 <h1><%= @destination.str_addr_fields %></h1>
 
-<h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
+<% if logged_in? %>
+  <h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
+<% end %>
 
 <h3>Travel Hacks</h3>
 <% @destination.hacks.each do |hack| %>

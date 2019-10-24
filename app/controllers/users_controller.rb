@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except:[:new, :create]
+  before_action :require_login, except:[:new, :create, :show]
 
   def show
   end
