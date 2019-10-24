@@ -12,7 +12,7 @@
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
     email: Faker::Internet.email,
     location: Faker::Address.city,
-    bio: Faker::Hipster.paragraphs(number: 2),
+    bio: Faker::Hipster.paragraphs(number: 2).join(' '),
     username: Faker::Internet.password,
     password: Faker::Internet.password
   })

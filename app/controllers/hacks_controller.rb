@@ -15,6 +15,9 @@ class HacksController < ApplicationController
     end
   end
 
+  ##
+
+
   def new
     
     @hack = Hack.new

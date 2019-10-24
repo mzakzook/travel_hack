@@ -1,7 +1,10 @@
 <% if flash[:errors] %>
   <%= "Please Fix Errors and Try Again" %>
+  <br>
   <% flash[:errors].each do |error| %>
+    <div>
     <%= error %>
+    </div>
   <% end %>
 <% end %>
 <br>

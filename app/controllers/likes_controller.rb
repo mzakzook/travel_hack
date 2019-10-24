@@ -1,13 +1,13 @@
 class LikesController < ApplicationController
-  before_action :find_hack
   before_action :find_like, only: [:destroy]
   
   def create
+
     if already_liked?
       flash[:notice] = "You can't like more than once"
     else
-      Like.create(like_params)
-      redirect_to @hack
+      like = Like.create(like_params)
+      redirect_to hack_path(like.hack_id)
     end
   end
 
@@ -17,21 +17,17 @@ class LikesController < ApplicationController
     else
       @like.destroy
     end
-    redirect_to hack_path(@hack)
+    redirect_to hack_path(@like.hack_id)
   end
 
   private
-
-  def find_hack
-    @hack = Hack.find(params[:like][:hack_id])
-  end
 
   def already_liked?
     Like.where(user_id: current_user.id, hack_id: params[:id]).exists?
   end
 
   def find_like
-    @like = Like.where(user_id: current_user.id, hack_id: params[:id])[0]
+    @like = Like.find_by(user_id: current_user.id, hack_id: params[:id])
   end
 
   def like_params

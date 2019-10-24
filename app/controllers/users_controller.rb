@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash[:errors] = @user.errors.full_messages
-      render 'new'
+      redirect_to signup_path 
     end
   end
 
@@ -44,12 +44,7 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
-    # byebug
   end
-
-  # def set_title
-  #   @title = @user.name
-  # end
 
   def user_params
     params.require(:user).permit(:name, :birthdate, :email, :location, :bio, :username, :password, :password_confirmation)
