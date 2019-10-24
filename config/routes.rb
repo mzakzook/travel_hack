@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   resources :destinations, only: [:index, :show] do 
     resources :hacks, shallow: true do
       resources :comments, shallow: true
-      resources :likes
-    end
+      resources :likes, shallow: true
+    end  
   end
-  resources :users, only: [:show, :create, :edit, :update, :destroy] 
+  resources :users, only: [:show, :create, :edit, :update, :destroy] do
+    resources :follows, shallow: true
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup', to: 'users#new', as: 'signup'

@@ -1,4 +1,9 @@
 <h1><%= @user.username %></h1>
+<% if logged_in? && current_user == @user %>
+  <%= button_to "#{@user.passive_relationships.count} Followers", user_follows_path(@user), params: {relationship: "Followers"}, :method => :get %>
+  <%= button_to "#{@user.active_relationships.count} Following", user_follows_path(@user), params: {relationship: "Following"}, :method => :get %>
+<% end %>
+<br>
 <%= @user.name %>
 <br>
 <%= @user.location %>
@@ -12,14 +17,17 @@
   <%= button_to "Edit Profile", edit_user_path, method: :get %>
 <% end %>
 
-<% @user.hacks.each do |hack| %>
-  <h3><%= hack.destination.str_addr_fields %></h3>
-    <p><%= hack.content %><p>
+
+<% if current_user != @user %>
+  <% pre_follow = @user.passive_relationships.find_by(follower_id: current_user.id) %>
+  <% if pre_follow %>
+    <%= button_to "Followed", follow_path(pre_follow), :method => :delete %>
+  <% else %>
+    <%= button_to "Follow", user_follows_path(@user), :method => :post %>
+  <% end %>
 <% end %>
 
-<%# **create button to link out to destinations/index %>
 <h3>Check Out Destinations and Add Your Hacks</h3>
 
 <%= button_to 'Destinations', destinations_path, method: :get %>
 <br>
-
