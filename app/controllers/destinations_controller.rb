@@ -7,7 +7,6 @@ class DestinationsController < ApplicationController
   end
 
   def show
-    
     @hack = Hack.new
   end
 

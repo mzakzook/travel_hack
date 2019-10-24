@@ -1,6 +1,7 @@
 class Destination < ApplicationRecord
   has_many :hacks
   has_many :users, through: :hacks
+  has_many :likes, through: :hacks
   # has_many :comments, through: :hacks
 
   def str_addr_fields

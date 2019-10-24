@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :hacks
   has_many :destinations, through: :hacks
-  has_many :comments, through: :hacks
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
   has_many :followed_users, through: :active_relationships, source: :followed_users

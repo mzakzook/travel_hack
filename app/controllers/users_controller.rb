@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+   
   end
 
   def update
@@ -34,19 +35,24 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    session.clear
     @user.destroy
-    redirect_to users_path
+    redirect_to root_path
   end
 
   private
 
   def find_user
     @user = User.find(params[:id])
+    # byebug
   end
+
+  # def set_title
+  #   @title = @user.name
+  # end
 
   def user_params
     params.require(:user).permit(:name, :birthdate, :email, :location, :bio, :username, :password, :password_confirmation)
   end
-
 
 end
