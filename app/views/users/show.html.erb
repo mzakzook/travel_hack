@@ -1,10 +1,10 @@
-<h1><%= @user.username %></h1>
-<% if logged_in? && current_user == @user %>
+<h1><%= @user.name %></h1>
+<% if logged_in? %>
   <%= button_to "#{@user.passive_relationships.count} Followers", user_follows_path(@user), params: {relationship: "Followers"}, :method => :get %>
   <%= button_to "#{@user.active_relationships.count} Following", user_follows_path(@user), params: {relationship: "Following"}, :method => :get %>
 <% end %>
 <br>
-<%= @user.name %>
+<%= @user.username %>
 <br>
 <%= @user.location %>
 <br>
@@ -18,7 +18,7 @@
 <% end %>
 
 
-<% if current_user != @user %>
+<% if logged_in? && current_user != @user %>
   <% pre_follow = @user.passive_relationships.find_by(follower_id: current_user.id) %>
   <% if pre_follow %>
     <%= button_to "Followed", follow_path(pre_follow), :method => :delete %>
@@ -27,7 +27,15 @@
   <% end %>
 <% end %>
 
-<h3>Check Out Destinations and Add Your Hacks</h3>
+<h3><%= @user.name %>'s Top Hacks</h3>
+<% @user.top_five.each do |hack| %>
+  <p><%= link_to hack.title, hack %>, <%= hack.destination.str_addr_fields %>, <%= hack.likes.count %> Likes</p>
+<% end %>
 
-<%= button_to 'Destinations', destinations_path, method: :get %>
-<br>
+
+<h3><%= @user.name %>'s Hacks</h3>
+<% @user.hacks.each do |hack| %>
+  <p><%= link_to hack.title, hack %>, <%= hack.destination.str_addr_fields %></p>
+<% end %>
+
+
