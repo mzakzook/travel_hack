@@ -6,4 +6,8 @@ class Hack < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   
+
+  def category_hacks(cat)
+    Hack.where(category: cat)
+  end
 end

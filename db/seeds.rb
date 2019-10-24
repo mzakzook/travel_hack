@@ -18,12 +18,11 @@
   })
 end
 
-50.times do 
-  Destination.create({
-    city: Faker::Address.city,
-    state: Faker::Address.state,
-    country: Faker::Address.country
-  })
+destinations = [{city: "New York", state: "NY", country: "USA"}, {city: "San Francisco", state: "CA", country: "USA"}, {city: "Los Angeles", state: "CA", country: "USA"}, {city: "Paris", country: "France"}, {city: "London", country: "UK"}, {city: "Tokyo", country: "Japan"}, {city: "Sydney", country: "Australia"}, {city: "Aukland", country: "New Zealand"}, {city: "Oakland", state: "CA", country: "USA"}, {city: "Cairo", country: "Egypt"}, {city: "Hong Kong"}, {city: "Singapore"}, {city: "Florence", country: "Italy"}, {city: "Berlin", country: "Germany"}, {city: "Vancouver", state: "BC", country: "Canada"}, {city: "Mexico City", country: "Mexico"}, {city: "Buenos Aires", country: "Argentina"}, {city: "Madrid", country: "Spain"}, {city: "Seoul", country: "South Korea"}]
+
+
+destinations.length.times do |i| 
+  Destination.create(destinations[i])
 end
 
 categories = ["Transportation", "Dining", "Nightlife", "Cultural", "Adventure", "Rewards/Points"]
@@ -50,5 +49,12 @@ end
   Like.create({
     user: User.all.sample,
     hack: Hack.all.sample
+  })
+end
+
+250.times do
+  Follow.create({
+    follower_id: User.all.sample.id,
+    followed_id: User.all.sample.id
   })
 end

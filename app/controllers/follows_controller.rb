@@ -1,7 +1,8 @@
 class FollowsController < ApplicationController
     def index
-        @active_relationships = current_user.active_relationships
-        @passive_relationships = current_user.passive_relationships
+        user = User.find(params[:user_id])
+        @active_relationships = user.active_relationships
+        @passive_relationships = user.passive_relationships
     end
 
     def create

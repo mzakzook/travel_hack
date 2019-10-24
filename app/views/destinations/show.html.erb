@@ -4,6 +4,9 @@
   <h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
 <% end %>
 
+<%= button_to "See All Hacks", destination_hacks_path(params[:id]), :method => :get %>
+
+
 <h3>Travel Hacks</h3>
 <% @destination.hacks.each do |hack| %>
   <p><%= hack.category %></p>
@@ -15,4 +18,3 @@
 
   
 
-  
