@@ -7,7 +7,7 @@
 <ul>
 <% @destinations.each do |destination| %>
   <li>
-  <%= link_to "#{destination.city}, #{destination.state}, #{destination.country}", destination %>
+  <%= link_to destination.str_addr_fields, destination %>
   </li>
   <%# add img_url for each destination. dest name and picture should link to show page%>
 

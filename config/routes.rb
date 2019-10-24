@@ -5,12 +5,13 @@ Rails.application.routes.draw do
       resources :likes, shallow: true
     end  
   end
-  resources :users, only: [:show, :create, :edit, :update, :destroy] do
+  resources :users, only: [:show, :edit, :update, :destroy] do
     resources :follows, shallow: true
   end
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup', to: 'users#new', as: 'signup'
+  post '/signup', to: 'users#create', as: 'users'
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

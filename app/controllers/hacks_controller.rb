@@ -3,9 +3,16 @@ class HacksController < ApplicationController
     before_action :categories, only: [:new, :edit]
     before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
+
+  def index
+    @destination = Destination.find(params[:destination_id])
+  end
+
   def show
     @comment = Comment.new
-    @user = User.find(session[:user_id])
+    if current_user
+      @user = User.find(current_user.id)
+    end
   end
 
   def new

@@ -1,7 +1,8 @@
 <h1><%= @hack.title %></h1>
 <h3>Hacker: <%= link_to @hack.user.username, @hack.user %></h3>
-<h3>Destination: <%= @hack.destination.str_addr_fields %></h3>
-<h3>Category: <%= @hack.category %></h3>
+<h3>Destination: <%= link_to @hack.destination.str_addr_fields, destination_path(@hack.destination) %></h3>
+<h4>Category: <%= @hack.category %></h4>
+<h4>Date: <%= @hack.created_at.strftime("%m/%d/%Y") %></h4>
 <br>
 <%= @hack.content %>
 <br>
@@ -10,18 +11,20 @@
     <h4><%= button_to "Edit Hack", edit_hack_path, :method => :get %></h4>
 <% end %>
 
-<p><%= @hack.likes.count %> <%= (@hack.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+<% if logged_in? %> 
+  <p><%= @hack.likes.count %> <%= (@hack.likes.count) == 1 ? 'Like' : 'Likes'%></p>
 
-<% pre_like = @hack.likes.find { |like| like.user_id == current_user.id} %>
-<% if pre_like %>
-  <%= button_to 'Unlike', like_path(@hack, pre_like), method: :delete, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
-<% else %>
-  <%= button_to 'Like', hack_likes_path(@hack), method: :post, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
+  <% pre_like = @hack.likes.find_by(user_id: current_user.id) %>
+  <% if pre_like %>
+    <%= button_to 'Unlike', like_path(@hack, pre_like), method: :delete, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
+  <% else %>
+    <%= button_to 'Like', hack_likes_path(@hack), method: :post, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
+  <% end %>
 <% end %>
 
 <br>
 <br>
-<h3>Comments</h3>
+<h4>Comments</h4>
 <% @hack.comments.each do |comment| %>
     <li>
     <%= comment.user.username %>
@@ -33,24 +36,27 @@
     </li>
 <% end %>
 <br>
-<h4>Add Comment</h4>
 
-<% if flash[:comment_errors] %>
-  <% flash[:comment_errors].each do |error| %>
-    <%= error %>
+<% if logged_in? %>
+  <h4>Add Comment</h4>
+
+  <% if flash[:comment_errors] %>
+    <% flash[:comment_errors].each do |error| %>
+      <%= error %>
+    <% end %>
   <% end %>
+
+
+  <%= form_for [@hack, @comment] do |f| %>
+      <div>
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </div>
+      <div>
+        <%= f.hidden_field :user_id, :value => @user.id %>
+        <%= f.hidden_field :hack_id, :value => @hack.id %>
+      </div>
+        
+      <%= f.submit %>
+    <% end %>
 <% end %>
-
-
-<%= form_for [@hack, @comment] do |f| %>
-    <div>
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </div>
-    <div>
-      <%= f.hidden_field :user_id, :value => @user.id %>
-      <%= f.hidden_field :hack_id, :value => @hack.id %>
-    </div>
-      
-    <%= f.submit %>
-  <% end %>
