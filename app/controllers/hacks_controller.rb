@@ -6,6 +6,7 @@ class HacksController < ApplicationController
 
   def index
     @destination = Destination.find(params[:destination_id])
+    @category = params[:cat]
   end
 
   def show
@@ -14,8 +15,6 @@ class HacksController < ApplicationController
       @user = User.find(current_user.id)
     end
   end
-
-  ##
 
 
   def new

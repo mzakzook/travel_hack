@@ -1,38 +1,42 @@
 <h1><%= @hack.title %></h1>
-<h3>Hacker: <%= link_to @hack.user.username, @hack.user %></h3>
-<h3>Destination: <%= link_to @hack.destination.str_addr_fields, destination_path(@hack.destination) %></h3>
-<h4>Category: <%= @hack.category %></h4>
-<h4>Date: <%= @hack.created_at.strftime("%m/%d/%Y") %></h4>
+<h4>Hacker: <%= link_to @hack.user.name, @hack.user %></h4>
+<h4>Destination: <%= link_to @hack.destination.str_addr_fields, destination_path(@hack.destination) %></h4>
+<h5>Category: <%= @hack.category %></h5>
+<h6>Date: <%= @hack.created_at.strftime("%m/%d/%Y") %></h6>
 <br>
 <%= @hack.content %>
 <br>
-
-<% if current_user == @hack.user %>
-    <h4><%= button_to "Edit Hack", edit_hack_path, :method => :get %></h4>
-<% end %>
-
+<br>
 <% if logged_in? %> 
-  <p><%= @hack.likes.count %> <%= (@hack.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+  <%= @hack.likes.count %> <%= (@hack.likes.count) == 1 ? 'Like' : 'Likes'%>
   <% pre_like = @hack.likes.find_by(user_id: current_user.id) %>
   <% if pre_like %>
-    <%= button_to 'Unlike', like_path(@hack, pre_like), method: :delete, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
+    <%= button_to 'Unlike', like_path(@hack, pre_like), method: :delete, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}}, class: "btn btn-danger btn-sm" %>
   <% else %>
-    <%= button_to 'Like', hack_likes_path(@hack), method: :post, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}} %>
+    <%= button_to 'Like', hack_likes_path(@hack), method: :post, params: {:like => {:user_id => current_user.id, :hack_id => @hack.id}}, class: "btn btn-primary btn-sm" %>
   <% end %>
 <% end %>
+
+<br>
+
+<% if current_user == @hack.user %>
+    <%= button_to "Edit Hack", edit_hack_path, :method => :get, class: "btn btn-outline-primary btn-sm" %>
+<% end %>
+
+
 
 <br>
 <br>
 <h4>Comments</h4>
 <% @hack.comments.each do |comment| %>
-    <li>
-    <%= comment.user.username %>
-    <br>
     <%= comment.content %>
+    <br>
+    <b><%= comment.user.username %></b>
+    <br>
     <% if comment.user == current_user %>
-        <%= button_to "Delete Comment", comment, :method => :delete %>
+        <%= button_to "Delete Comment", comment, :method => :delete, class: "btn btn-outline-danger btn-sm" %>
     <% end %>
-    </li>
+    <br>
 <% end %>
 <br>
 
@@ -47,7 +51,6 @@
 
   <%= form_for [@hack, @comment] do |f| %>
       <div>
-        <%= f.label :content %>
         <%= f.text_area :content %>
       </div>
       <div>
@@ -55,6 +58,6 @@
         <%= f.hidden_field :hack_id, :value => @hack.id %>
       </div>
         
-      <%= f.submit %>
+      <%= f.submit "Submit", class: "btn btn-outline-success btn-sm" %>
     <% end %>
 <% end %>

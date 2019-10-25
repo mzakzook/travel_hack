@@ -1,39 +1,40 @@
 <h1><%= @user.name %></h1>
 <% if logged_in? %>
-  <%= button_to "#{@user.passive_relationships.count} Followers", user_follows_path(@user), params: {relationship: "Followers"}, :method => :get %>
-  <%= button_to "#{@user.active_relationships.count} Following", user_follows_path(@user), params: {relationship: "Following"}, :method => :get %>
+  <%= button_to "#{@user.passive_relationships.count} Followers", user_follows_path(@user), params: {relationship: "Followers"}, :method => :get, class: "btn btn-outline-info btn-sm" %>
+  <%= button_to "#{@user.active_relationships.count} Following", user_follows_path(@user), params: {relationship: "Following"}, :method => :get, class: "btn btn-outline-info btn-sm" %>
 <% end %>
 <br>
-<%= @user.username %>
+<%= "Username: #{@user.username}" %>
 <br>
-<%= @user.location %>
+<%= "Location: #{@user.location}" %>
 <br>
-<%= @user.bio %>
+<%= "Bio: #{@user.bio}" %>
 <br>
 <%= "Age: #{@user.age}" %>
 <br>
 
 <% if logged_in? && current_user == @user %>
-  <%= button_to "Edit Profile", edit_user_path, method: :get %>
+  <%= button_to "Edit Profile", edit_user_path, method: :get, class: "btn btn-outline-primary btn-sm" %>
 <% end %>
 
 
 <% if logged_in? && current_user != @user %>
   <% pre_follow = @user.passive_relationships.find_by(follower_id: current_user.id) %>
   <% if pre_follow %>
-    <%= button_to "Followed", follow_path(pre_follow), :method => :delete %>
+    <%= button_to "Followed", follow_path(pre_follow), :method => :delete, class: "btn btn-outline-success btn-sm" %>
   <% else %>
-    <%= button_to "Follow", user_follows_path(@user), :method => :post %>
+    <%= button_to "Follow", user_follows_path(@user), :method => :post, class: "btn btn-outline-primary btn-sm" %>
   <% end %>
 <% end %>
 
-<h3><%= @user.name %>'s Top Hacks</h3>
+<br>
+<h4><%= @user.name %>'s Top Hacks</h4>
 <% @user.top_five.each do |hack| %>
   <p><%= link_to hack.title, hack %>, <%= hack.destination.str_addr_fields %>, <%= hack.likes.count %> Likes</p>
 <% end %>
 
-
-<h3><%= @user.name %>'s Hacks</h3>
+<br>
+<h4><%= @user.name %>'s Hacks</h4>
 <% @user.hacks.each do |hack| %>
   <p><%= link_to hack.title, hack %>, <%= hack.destination.str_addr_fields %></p>
 <% end %>

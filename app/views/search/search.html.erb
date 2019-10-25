@@ -14,6 +14,14 @@
         <br>
     <% end %>
 <% end %>
-<% if @results[0].empty? && @results[1].empty? %>
-    <h4>There are no results</h4>
+<% if !@results[2].empty? %>
+    <h2>User Results</h2>
+    <br>
+    <% @results[2].each do |user| %>
+        <%= link_to "#{user.name}, #{user.location}", user %>
+        <br>
+    <% end %>
+<% end %>
+<% if @results[0].empty? && @results[1].empty? && @results[2].empty? %>
+    <h4>No results found</h4>
 <% end %>

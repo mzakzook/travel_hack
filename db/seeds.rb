@@ -12,8 +12,8 @@
     birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
     email: Faker::Internet.email,
     location: Faker::Address.city,
-    bio: Faker::Hipster.paragraphs(number: 2).join(' '),
-    username: Faker::Internet.password,
+    bio: Faker::Hipster.paragraphs(number: 1).join(' '),
+    username: Faker::Internet.username,
     password: Faker::Internet.password
   })
 end
@@ -50,14 +50,14 @@ categories = ["Transportation", "Dining", "Nightlife", "Cultural", "Adventure", 
 2500.times do 
   Hack.create({
     category: categories.sample,
-    title: Faker::Hipster.sentence(word_count: 4),
-    content: Faker::Hipster.paragraphs(number: 1).join(' '),
+    title: Faker::GreekPhilosophers.quote,
+    content: Faker::Hipster.paragraphs(number: 3).join(' '),
     user: User.all.sample,
     destination: Destination.all.sample
   })
 end
 
-1000.times do 
+10000.times do 
   Comment.create({
     content: Faker::Hipster.paragraphs(number: 1).join(' '),
     user: User.all.sample,
@@ -65,14 +65,14 @@ end
   })
 end
 
-5000.times do
+10000.times do
   Like.create({
     user: User.all.sample,
     hack: Hack.all.sample
   })
 end
 
-250.times do
+1000.times do
   Follow.create({
     follower_id: User.all.sample.id,
     followed_id: User.all.sample.id

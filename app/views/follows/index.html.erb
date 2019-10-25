@@ -1,15 +1,13 @@
 <% if params[:relationship] == "Followers" %>
     <h3><%= @passive_relationships.count %><%= (@passive_relationships.count) == 1 ? ' Follower' : ' Followers' %></h3>
    <% @passive_relationships.each do |follow| %>
-        <li>
+        <br>
         <%= link_to follow.follower_user.name, user_path(follow.follower_user) %>
-        </li>
     <% end %>
 <% else %>
     <h3><%= @active_relationships.count %> Following</h3>
     <% @active_relationships.each do |follow| %>
-        <li>
+        <br>
         <%= link_to follow.followed_user.name, user_path(follow.followed_user) %>
-        </li>
     <% end %>
  <% end %>

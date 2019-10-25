@@ -3,5 +3,5 @@
 <%= form_tag login_path do %>
   <%= text_field_tag :username, nil, placeholder: "username" %>
   <%= password_field_tag :password, nil, placeholder: "Password" %>
-  <%= submit_tag "Sign In" %>
+  <%= submit_tag "Log In", class: "btn btn-outline-primary btn-sm" %>
 <% end %>

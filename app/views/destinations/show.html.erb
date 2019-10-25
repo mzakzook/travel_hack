@@ -1,14 +1,44 @@
 <h1><%= @destination.str_addr_fields %></h1>
 
-<img src="<%= @destination.img_url %>" height="400">
+<img src="<%= @destination.img_url %>" >
+
+<br>
+
 
 <% if logged_in? %>
-  <h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
+  <%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get, class: "btn btn-outline-primary btn-sm" %>
 <% end %>
 
-<%= button_to "See All Hacks", destination_hacks_path(params[:id]), :method => :get %>
+<%= button_to "See All Hacks", destination_hacks_path(params[:id]), :method => :get, class: "btn btn-outline-primary btn-sm" %>
+
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <%= link_to "Adventure", destination_hacks_path(@destination, params: {:cat => "Adventure", :destination_id => @destination.id}) %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Cultural", destination_hacks_path(@destination, params: {:cat => "Cultural", :destination_id => @destination.id}) %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Dining", destination_hacks_path(@destination, params: {:cat => "Dining", :destination_id => @destination.id}) %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Nightlife", destination_hacks_path(@destination, params: {:cat => "Nightlife", :destination_id => @destination.id}) %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Rewards/Points", destination_hacks_path(@destination, params: {:cat => "Rewards/Points", :destination_id => @destination.id}) %>
+    </div>
+    <div class="col-sm">
+     <%= link_to "Transportation", destination_hacks_path(@destination, params: {:cat => "Transportation", :destination_id => @destination.id}) %>
+    </div>
+  </div>
+</div>
 
 
+
+<br>
 <h3>Recent <%= @destination.city %> Hacks</h3>
 <% @destination.five_recent.each do |hack| %>
   <h4><%= link_to hack.title, hack %></h4>
