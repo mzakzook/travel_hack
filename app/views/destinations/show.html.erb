@@ -1,5 +1,7 @@
 <h1><%= @destination.str_addr_fields %></h1>
 
+<img src="<%= @destination.img_url %>" height="400">
+
 <% if logged_in? %>
   <h4><%= button_to "Add a New Travel Hack", new_destination_hack_path(params[:id]), :method => :get %></h4>
 <% end %>
@@ -7,12 +9,14 @@
 <%= button_to "See All Hacks", destination_hacks_path(params[:id]), :method => :get %>
 
 
-<h3>Travel Hacks</h3>
-<% @destination.hacks.each do |hack| %>
+<h3>Recent <%= @destination.city %> Hacks</h3>
+<% @destination.five_recent.each do |hack| %>
+  <h4><%= link_to hack.title, hack %></h4>
   <p><%= hack.category %></p>
-  <p><%= hack.title %></p>
+  <p><%= hack.created_at.strftime("%m/%d/%Y") %></p>
   <p><%= hack.content %></p>
   <p>Submitted by <%= hack.user.name %></p>
+  <br>
 <% end %>
 
 

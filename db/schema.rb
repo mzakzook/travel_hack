@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_205245) do
     t.string "city"
     t.string "state"
     t.string "country"
+    t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

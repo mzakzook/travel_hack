@@ -22,4 +22,8 @@ class Destination < ApplicationRecord
   def category_hacks(cat)
     Hack.where(category: cat, destination: self)
   end
+
+  def five_recent
+    self.hacks.select('hacks.*').order('created_at DESC').limit(5)
+  end
 end

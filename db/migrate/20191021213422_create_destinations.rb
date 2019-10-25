@@ -4,6 +4,7 @@ class CreateDestinations < ActiveRecord::Migration[6.0]
       t.string :city
       t.string :state
       t.string :country
+      t.string :img_url
 
       t.timestamps
     end

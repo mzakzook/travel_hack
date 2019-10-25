@@ -2,43 +2,31 @@
 
 <h4>Adventure</h4>
 <% @destination.category_hacks("Adventure").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>    
 <% end %>
   
 <h4>Cultural</h4>
 <% @destination.category_hacks("Cultural").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>
 <% end %>
 
 <h4>Dining</h4>
 <% @destination.category_hacks("Dining").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>
 <% end %>
 
 <h4>Nightlife</h4>
 <% @destination.category_hacks("Nightlife").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>
 <% end %>
 
 <h4>Rewards/Points</h4>
 <% @destination.category_hacks("Rewards/Points").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>
 <% end %>
 
 <h4>Transportation</h4>
 <% @destination.category_hacks("Transportation").each do |hack| %>
-    <p><%= link_to hack.title, hack %></p>
-    <p><%= hack.content %></p>
-    <p>Submitted by <%= hack.user.name %></p>
+    <p><%= link_to hack.title, hack %>, Submitted by <%= hack.user.name %></p>
 <% end %>
 
