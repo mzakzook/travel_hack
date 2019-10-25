@@ -3,7 +3,7 @@ class DestinationsController < ApplicationController
   before_action :categories, only: :show
   
   def index
-    @destinations = Destination.search(params[:search])
+    @destinations = Destination.all
   end
 
   def show

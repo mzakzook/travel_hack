@@ -11,13 +11,13 @@ class Destination < ApplicationRecord
     str
   end
 
-  def self.search(search)
-    if search
-      destinations = Destination.where("city LIKE (?) OR state LIKE (?) OR country LIKE (?)", "%#{search}%", "%#{search}%", "%#{search}%")
-    else
-      Destination.all
-    end
-  end
+  # def self.search(search)
+  #   if search
+  #     destinations = Destination.where("city LIKE (?) OR state LIKE (?) OR country LIKE (?)", "%#{search}%", "%#{search}%", "%#{search}%")
+  #   else
+  #     Destination.all
+  #   end
+  # end
 
   def category_hacks(cat)
     Hack.where(category: cat, destination: self)

@@ -1,0 +1,19 @@
+<% if !@results[0].empty? %>
+    <h2>Destination Results</h2>
+    <br>
+    <% @results[0].each do |destination| %>
+        <%= link_to destination.str_addr_fields, destination %>
+        <br>
+    <% end %>
+<% end %>
+<% if !@results[1].empty? %>
+    <h2>Hack Results</h2>
+    <br>
+    <% @results[1].each do |hack| %>
+        <%= link_to hack.title, hack %>
+        <br>
+    <% end %>
+<% end %>
+<% if @results[0].empty? && @results[1].empty? %>
+    <h4>There are no results</h4>
+<% end %>

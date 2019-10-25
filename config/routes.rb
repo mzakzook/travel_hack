@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create', as: 'users'
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
+  get '/search-results', to: 'welcome#index', as: 'search-results'
 
   root 'welcome#welcome'
 

@@ -1,15 +1,9 @@
 <h1>Destinations</h1>
 
-<%= form_tag(destinations_path, method: :get) do %>
-  <%= text_field_tag(:search, params[:search]) %>
-  <%= submit_tag("Search") %>
-<% end %>
-<ul>
 <% @destinations.each do |destination| %>
-  <li>
+  
   <%= link_to destination.str_addr_fields, destination %>
-  </li>
-  <%# add img_url for each destination. dest name and picture should link to show page%>
 
+  <%# add img_url for each destination. dest name and picture should link to show page%>
+  <br>
 <% end %>
-</ul>
