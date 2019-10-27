@@ -21,6 +21,7 @@ class HacksController < ApplicationController
     
     @hack = Hack.new
     @destination = Destination.find(params[:destination_id])
+    @dest_city = @destination.city
     @user = User.find(session[:user_id])
   end
 
@@ -35,6 +36,7 @@ class HacksController < ApplicationController
   end
 
   def edit
+    @dest_city = @hack.destination.city
     @user = User.find(session[:user_id])
     
   end
