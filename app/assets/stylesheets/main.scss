@@ -3,7 +3,10 @@ main {
     margin: 0 auto;
     padding-top: $spacer;
     padding-bottom: $spacer;
-    img {
+    .reg-img {
         width: 100%;
+    }
+    .small-img {
+        width: 25%;
     }
 }

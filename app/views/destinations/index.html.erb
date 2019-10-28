@@ -1,8 +1,25 @@
 <h1>Destinations</h1>
 
-<% @destinations.each do |destination| %>
+<% @destinations.sort_by {|destination| destination.city }.each do |destination| %>
   
   <%= link_to destination.str_addr_fields, destination %>
+  
+  <% if false %>
+  <br>
+  <a href= "/destinations/<%= destination.id %>"><img src="<%= destination.img_url %>" class="small-img" ></a>
+  <% end %>
 
+  <% if false %>
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="<%= destination.img_url %>" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= destination.str_addr_fields %></h5>
+      <p class="card-text">See <%= destination.city %> Hacks!</p>
+      <a href="/destinations/<%= destination.id %>" class="btn btn-primary">Select</a>
+    </div>
+  </div>
+  <% end %>
+  
   <br>
 <% end %>
+
